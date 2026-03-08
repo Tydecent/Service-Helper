@@ -3,7 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <unistd.h>
-#include <ofstream>
+#include <fstream>
 
 bool is_root();
 
