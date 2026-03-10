@@ -19,8 +19,8 @@ std::string construct_service_file(std::vector<std::string> inquire_result) {
     service_file += "User=root\n";
     service_file += "Group=root\n";
     service_file += "\n";
-    service_file += "[Install]";
+    service_file += "[Install]\n";
     service_file += "WantedBy=multi-user.target";
-    
+
     return service_file;
 }

@@ -38,3 +38,14 @@ bool write_file(std::string content, std::string path) {
         return false;
     }
 }
+
+int system_call(std::string command) {
+    // 执行系统命令，返回命令执行结果
+    return std::system(command.c_str());
+}
+
+bool add_executable_to_path(std::string exec_path) {
+    // 为用户指定的运行程序添加可执行权限，使用chmod命令
+    std::string chmod_command = "chmod +x " + exec_path;
+    return system_call(chmod_command) == 0;
+}
