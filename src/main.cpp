@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
     std::string service_file = construct_service_file(inquire_result);
 
     // 写入服务文件
-    if (write_file(service_file, "/etc/systemd/system/")) {
+    if (write_file(service_file, "/etc/systemd/system/" + inquire_result[1] + ".service")) {
         std::cout << "写入成功。" << std::endl;
     } else {
         std::cout << "文件写入失败。" << std::endl;
