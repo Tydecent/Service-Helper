@@ -62,17 +62,17 @@ bool add_executable_to_path(std::string exec_path) {
 bool check_shebang(std::string exec_path) {
     // 检查可执行文件的shebang，返回true表示shebang存在且正确
     std::ifstream ifs(exec_path);
-
-    std::string line;
-    std::getline(ifs, line);
-    if (line.find("#!") != std::string::npos) {
-        std::string shebang = line.substr(2);
-        if (shebang.find("/bin/bash") != std::string::npos ||
-            shebang.find("/bin/sh") != std::string::npos) {
-            return true;
+    if (ifs.is_open()) {
+        std::string line;
+        std::getline(ifs, line);
+        if (line.find("#!") != std::string::npos) {
+            std::string shebang = line.substr(2);
+            if (shebang.find("/bin/bash") != std::string::npos ||
+                shebang.find("/bin/sh") != std::string::npos) {
+                return true;
+            }
         }
     }
-    
     return false;
 }
 
@@ -80,23 +80,4 @@ bool check_file_exists(std::string exec_path) {
     // 检查文件是否存在
     std::ifstream ifs(exec_path);
     return ifs.is_open();
-}
-
-int check_exec(std::string exec_path) {
-    // 对可执行文件进行系列检查
-    if (check_file_exists(exec_path) == false) {
-        std::cout << "文件不存在。" << std::endl;
-        exit(-101);
-    }
-
-    if (check_shebang(exec_path) == false) {
-        exit(-102);
-    }
-
-    if (add_executable_to_path(inquire_result[0]) == false) {
-        std::cout << "添加可执行权限失败。" << std::endl;
-        exit(-103);
-    }
-
-    return 0;
 }
