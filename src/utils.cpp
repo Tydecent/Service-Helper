@@ -93,7 +93,7 @@ int check_exec(std::string exec_path) {
         exit(-102);
     }
 
-    if (add_executable_to_path(inquire_result[0]) == false) {
+    if (add_executable_to_path(exec_path) == false) {
         std::cout << "添加可执行权限失败。" << std::endl;
         exit(-103);
     }
