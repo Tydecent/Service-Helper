@@ -16,3 +16,7 @@ bool write_file(std::string, std::string);
 int system_call(std::string command);
 
 bool add_executable_to_path(std::string exec_path);
+
+bool check_shebang(std::string exec_path);
+
+bool check_file_exists(std::string exec_path);
