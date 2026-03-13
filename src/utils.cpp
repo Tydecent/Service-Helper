@@ -85,16 +85,17 @@ bool check_file_exists(std::string exec_path) {
 int check_exec(std::string exec_path) {
     // 对可执行文件进行系列检查
     if (check_file_exists(exec_path) == false) {
-        std::cout << "文件不存在。" << std::endl;
+        std::cout << "文件不存在。Error_101" << std::endl;
         exit(-101);
     }
 
     if (check_shebang(exec_path) == false) {
+        std::cout << "文件shebang错误。Error_102" << std::endl;
         exit(-102);
     }
 
     if (add_executable_to_path(exec_path) == false) {
-        std::cout << "添加可执行权限失败。" << std::endl;
+        std::cout << "添加可执行权限失败。Error_103" << std::endl;
         exit(-103);
     }
 
