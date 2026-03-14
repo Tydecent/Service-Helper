@@ -15,6 +15,9 @@ int main(int argc, char *argv[]) {
     // 询问信息
     std::vector<std::string> inquire_result = Inquire();
 
+    // 检查可执行文件
+    check_exec(inquire_result[0]);
+
     // 构造服务文件
     std::string service_file = construct_service_file(inquire_result);
 
