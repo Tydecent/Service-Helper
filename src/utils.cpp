@@ -10,7 +10,7 @@ bool is_root() {
 
 std::string Inquire_once(std::string question) {
     std::string result;
-    std::cout << question << std::endl;
+    std::cout << question;
     std::cin >> result;
     return result;
 }
@@ -23,7 +23,7 @@ again:
 
     // 检查文件是否存在
     if (check_file_exists(exec_path) ==  false) {
-        std::cout << "文件不存在，请重新输入！" << std::endl;
+        std::cout << "文件不存在，请重新输入！\n";
         goto again;
     }
 
