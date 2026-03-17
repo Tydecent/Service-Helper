@@ -59,28 +59,32 @@ bool add_executable_to_path(std::string exec_path) {
     return system_call(chmod_command) == 0;
 }
 
-bool check_shebang(std::string exec_path) {
-    // 检查可执行文件的shebang，返回true表示shebang存在且正确
-    std::ifstream ifs(exec_path);
-
-    std::string line;
-    std::getline(ifs, line);
-    if (line.find("#!") != std::string::npos) {
-        std::string shebang = line.substr(2);
-        if (shebang.find("/bin/bash") != std::string::npos ||
-            shebang.find("/bin/sh") != std::string::npos) {
-            return true;
-        }
-    }
-    
-    return false;
-}
-
 bool check_file_exists(std::string exec_path) {
     // 检查文件是否存在
     std::ifstream ifs(exec_path);
     return ifs.is_open();
 }
+
+bool check_shebang(std::string exec_path) {
+    // 检查可执行文件的shebang，返回true表示shebang存在且正确
+    std::ifstream file(exec_path);
+
+    char buffer[2];
+
+    file.read(buffer, 2);
+
+    if (file.gcount() == 2) {
+        if (buffer[0] == '#' && buffer[1] == '!') {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+
+}
+
 
 int check_exec(std::string exec_path) {
     // 对可执行文件进行系列检查
@@ -89,10 +93,10 @@ int check_exec(std::string exec_path) {
         exit(-101);
     }
 
-    // if (check_shebang(exec_path) == false) {
-    //     std::cout << "文件shebang错误。Error_102" << std::endl;
-    //     exit(-102);
-    // }
+    if (check_shebang(exec_path) == false) {
+        std::cout << "文件shebang错误。Error_102" << std::endl;
+        exit(-102);
+    }
 
     if (add_executable_to_path(exec_path) == false) {
         std::cout << "添加可执行权限失败。Error_103" << std::endl;
