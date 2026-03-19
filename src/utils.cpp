@@ -22,7 +22,7 @@ again:
     std::string exec_path = Inquire_once("请输入可执行文件位置：");
 
     // 检查文件是否存在
-    if (check_file_exists(exec_path) ==  false) {
+    if (check_exec(exec_path) ==  false) {
         std::cout << "文件不存在，请重新输入！\n";
         goto again;
     }
