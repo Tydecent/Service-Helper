@@ -27,6 +27,11 @@ Service-Helper
 └── README.md
 ```
 
+## Wiki
+项目文档见(GitHub Wiki)[https://github.com/Tydecent/Service-Helper/wiki]页面。
+
+
+
 ## 法律与许可
 本开源项目遵循MIT许可证，这意味着你可以自由地使用、修改、分发本项目。唯一的要求是保留版权标识。
 许可全文详见[LICENSE](LICENSE)文件。
