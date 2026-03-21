@@ -28,7 +28,7 @@ Service-Helper
 ```
 
 ## Wiki
-项目文档见(GitHub Wiki)[https://github.com/Tydecent/Service-Helper/wiki] 页面。
+项目文档见[GitHub Wiki](https://github.com/Tydecent/Service-Helper/wiki) 页面。
 
 
 
