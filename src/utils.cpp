@@ -85,7 +85,6 @@ bool check_shebang(std::string exec_path) {
 
 }
 
-
 int check_exec(std::string exec_path) {
     // 对可执行文件进行系列检查
     if (check_file_exists(exec_path) == false) {
@@ -93,7 +92,7 @@ int check_exec(std::string exec_path) {
         return 101;
     }
 
-    if (check_shebang(exec_path) == false) {
+    if (check_ELF_magicnum(exec_path) || check_shebang(exec_path) == false) {
         std::cout << "文件shebang错误。Error_102" << std::endl;
         return 102;
     }
@@ -104,4 +103,23 @@ int check_exec(std::string exec_path) {
     }
 
     return 0;
+}
+
+bool check_ELF_magicnum(std::string exec_path) {
+    // 检查文件头是否为ELF格式，通过判断文件前4字节是否为魔术字:0x7F 0x45 0x4C 0x46
+    std::ifstream file(exec_path);
+
+    char buffer[4];
+
+    file.read(buffer, 4);
+
+    if (file.gcount() == 4) {
+        if (buffer[0] == '\x7f' && buffer[1] == 'E' && buffer[2] == 'L' && buffer[3] == 'F') {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
 }

@@ -22,3 +22,5 @@ bool check_shebang(std::string exec_path);
 bool check_file_exists(std::string exec_path);
 
 int check_exec(std::string exec_path);
+
+bool check_ELF_magicnum(std::string exec_path)
