@@ -92,7 +92,7 @@ int check_exec(std::string exec_path) {
         return 101;
     }
 
-    if (check_ELF_magicnum(exec_path) == false || check_shebang(exec_path) == false) {
+    if (check_ELF_magicnum(exec_path) == false && check_shebang(exec_path) == false) {
         std::cout << "文件shebang错误。Error_102" << std::endl;
         return 102;
     }
