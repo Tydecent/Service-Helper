@@ -15,12 +15,12 @@ bool write_file(std::string, std::string);
 
 int system_call(std::string command);
 
+int check_exec(std::string exec_path);
+
 bool add_executable_to_path(std::string exec_path);
 
 bool check_shebang(std::string exec_path);
 
 bool check_file_exists(std::string exec_path);
-
-int check_exec(std::string exec_path);
 
 bool check_ELF_magicnum(std::string exec_path);

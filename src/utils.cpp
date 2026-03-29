@@ -53,6 +53,26 @@ int system_call(std::string command) {
     return std::system(command.c_str());
 }
 
+int check_exec(std::string exec_path) {
+    // 对可执行文件进行系列检查
+    if (check_file_exists(exec_path) == false) {
+        std::cout << "文件不存在。Error_101" << std::endl;
+        return 101;
+    }
+
+    if (check_ELF_magicnum(exec_path) == false && check_shebang(exec_path) == false) {
+        std::cout << "文件shebang错误。Error_102" << std::endl;
+        return 102;
+    }
+
+    if (add_executable_to_path(exec_path) == false) {
+        std::cout << "添加可执行权限失败。Error_103" << std::endl;
+        return 103;
+    }
+
+    return 0;
+}
+
 bool add_executable_to_path(std::string exec_path) {
     // 为用户指定的运行程序添加可执行权限，使用chmod命令
     std::string chmod_command = "chmod +x " + exec_path;
@@ -83,26 +103,6 @@ bool check_shebang(std::string exec_path) {
         return false;
     }
 
-}
-
-int check_exec(std::string exec_path) {
-    // 对可执行文件进行系列检查
-    if (check_file_exists(exec_path) == false) {
-        std::cout << "文件不存在。Error_101" << std::endl;
-        return 101;
-    }
-
-    if (check_ELF_magicnum(exec_path) == false && check_shebang(exec_path) == false) {
-        std::cout << "文件shebang错误。Error_102" << std::endl;
-        return 102;
-    }
-
-    if (add_executable_to_path(exec_path) == false) {
-        std::cout << "添加可执行权限失败。Error_103" << std::endl;
-        return 103;
-    }
-
-    return 0;
 }
 
 bool check_ELF_magicnum(std::string exec_path) {
