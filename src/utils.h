@@ -5,6 +5,9 @@
 #include <unistd.h>
 #include <fstream>
 #include <cstdlib>
+#include <filesystem>
+
+namespace fs = std::filesystem;
 
 bool is_root();
 
@@ -24,3 +27,5 @@ bool check_shebang(std::string exec_path);
 bool check_file_exists(std::string exec_path);
 
 bool check_ELF_magicnum(std::string exec_path);
+
+std::string get_file_ext(std::string exec_path);

@@ -123,3 +123,9 @@ bool check_ELF_magicnum(std::string exec_path) {
         return false;
     }
 }
+
+std::string get_file_ext(std::string exec_path) {
+    // 获取文件扩展名
+    fs::path p = exec_path;
+    return p.extension().string();
+}
