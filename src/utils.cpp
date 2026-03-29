@@ -129,3 +129,19 @@ std::string get_file_ext(std::string exec_path) {
     fs::path p = exec_path;
     return p.extension().string();
 }
+
+std::string get_file_type(std::string exec_path) {
+    // 获取文件类型
+    std::string file_ext = get_file_ext(exec_path);
+    switch (file_ext)
+    {
+        case ".sh":
+            return "shell";
+        case ".py":
+            return "python";
+        case ".js":
+            return "JavaScript";
+        default:
+            return "unknown";
+    }
+}

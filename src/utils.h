@@ -29,3 +29,5 @@ bool check_file_exists(std::string exec_path);
 bool check_ELF_magicnum(std::string exec_path);
 
 std::string get_file_ext(std::string exec_path);
+
+std::string get_file_type(std::string exec_path);
