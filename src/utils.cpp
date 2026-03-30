@@ -64,15 +64,8 @@ int check_exec(std::string exec_path) {
     bool is_ELF     = check_ELF_magicnum(exec_path);
 
     if (is_shebang == false && is_ELF == false) {
-        std::cout << "文件格式错误。Error_102" << std::endl;
+        std::cout << "未找到shebang和ELF头，如该文件为脚本文件，请添加shebang。文件类型为：" << get_file_type(exec_path) << "。Error_102" << std::endl;
         return 102;
-
-    } else if (is_ELF == false) {
-        std::cout << "未检测到ELF头" << std::endl;
-
-    } else if (is_shebang == false) {
-        std::cout << "未检测到shebang"<< std::endl;
-
     }
 
     if (add_executable_to_path(exec_path) == false) {
