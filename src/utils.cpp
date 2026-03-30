@@ -134,7 +134,7 @@ std::string get_file_ext(std::string exec_path) {
 }
 
 std::string get_file_type(std::string exec_path) {
-    // 获取文件类型
+    // 判断文件类型
     std::string file_ext = get_file_ext(exec_path);
     if (file_ext == ".sh") {
         return "shell";
