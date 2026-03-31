@@ -174,15 +174,29 @@ bool Inquire_add_shebang(std::string file_type) {
 }
 
 bool add_shebang(std::string exec_path, std::string file_type) {
-    std::ofstream ofs;
-    ofs.open(exec_path, std::ios::out);
+    // 为脚本文件添加shebang
+
+    // 构造shebang
+    std::string shebang;
     if (file_type == "shell") {
-        ofs << "#!/bin/bash" << std::endl;
+        shebang == "#!/bin/bash";
     } else if (file_type == "python") {
-        ofs << "#!/usr/bin/env python3" << std::endl;
+        shebang == "#!/usr/bin/env python";
     } else if (file_type == "JavaScript") {
-        ofs << "#!/usr/bin/env node" << std::endl;
+        shebang == "#!/usr/bin/env node";
     }
+    shebang == shebang + "\n";
+
+    // 读取文件的全部内容
+    std::ifstream ifs(exec_path);
+    std::stringstream original_fil_buffer;
+    original_file_buffer << ifs.rdbuf();
+    std::string original_file = original_file_buffer.str();
+    ifs.close();
+
+    // 写入shebang+文件内容
+    std::ofstream ofs(exec_path, std::ios::out);
+    ofs << shebang << original_file;
     ofs.close();
     return true;
 }
