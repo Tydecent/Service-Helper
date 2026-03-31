@@ -163,7 +163,7 @@ std::string get_file_type(std::string exec_path) {
 
 bool Inquire_add_shebang(std::string file_type) {
     // 询问是否添加shebang
-    std::string choice = Inquire_once("检测到文件类型为" + file_type + "但未检测到shebang，是否添加shebang? (Y/n):")
+    std::string choice = Inquire_once("检测到文件类型为" + file_type + "但未检测到shebang，是否添加shebang? (Y/n):");
     if (choice == "Y" || choice == "y" || choice == "") {
         return true;
     } else if (choice == "N" || choice == "n") {
