@@ -29,5 +29,8 @@ int main(int argc, char *argv[]) {
         return -2;
     }
 
+    // 使服务生效
+    effective_service(inquire_result[1] + ".service")
+
     return 0;
 }

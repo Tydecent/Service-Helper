@@ -222,3 +222,8 @@ bool add_shebang(std::string exec_path, std::string file_type) {
     // 保险起见，再检查一遍shebang
     return check_shebang(exec_path);
 }
+
+void effective_service(std::string service_name) {
+    system_call("systemctl enable " + service_name);
+    system_call("systemctl start " + service_name);
+}
