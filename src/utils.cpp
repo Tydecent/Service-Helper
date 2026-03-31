@@ -191,17 +191,58 @@ bool add_shebang(std::string exec_path, std::string file_type) {
     }
     shebang = shebang + "\n";
 
-    // 读取文件的全部内容
-    std::ifstream ifs(exec_path);
-    std::stringstream original_file_buffer;
-    original_file_buffer << ifs.rdbuf();
-    std::string original_file = original_file_buffer.str();
-    ifs.close();
+    // 以读模式打开原文件
+    FILE* in = fopen(exec_path.c_str(), "r");
+    if (!in) {
+        return false;  // 打开失败
+    }
 
-    // 写入shebang+文件内容
-    std::ofstream ofs(exec_path, std::ios::out);
-    ofs << shebang << original_file;
-    ofs.close();
+    // 获取文件大小
+    if (fseek(in, 0, SEEK_END) != 0) {
+        fclose(in);
+        return false;
+    }
+    long size = ftell(in);
+    if (size == -1) {
+        fclose(in);
+        return false;
+    }
+    rewind(in);
+
+    // 分配缓冲区并读取文件全部内容
+    char* buffer = new char[size];
+    size_t read_bytes = fread(buffer, 1, size, in);
+    fclose(in);
+
+    if (read_bytes != static_cast<size_t>(size)) {
+        delete[] buffer;
+        return false;  // 读取不完整
+    }
+
+    // 以写模式打开同一文件（清空原内容）
+    FILE* out = fopen(exec_path.c_str(), "w");
+    if (!out) {
+        delete[] buffer;
+        return false;
+    }
+
+    // 写入shebang
+    size_t shebang_len = shebang.size();
+    size_t written = fwrite(shebang.c_str(), 1, shebang_len, out);
+    if (written != shebang_len) {
+        fclose(out);
+        delete[] buffer;
+        return false;
+    }
+
+    // 写入原文件内容
+    written = fwrite(buffer, 1, size, out);
+    fclose(out);
+    delete[] buffer;
+
+    if (written != static_cast<size_t>(size)) {
+        return false;  // 写入不完整
+    }
 
     // 保险起见，再检查一遍shebang
     return check_shebang(exec_path);
