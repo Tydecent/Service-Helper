@@ -191,17 +191,23 @@ bool add_shebang(std::string exec_path, std::string file_type) {
     }
     shebang = shebang + "\n";
 
-    // 读取文件的全部内容
-    std::ifstream ifs(exec_path);
-    std::stringstream original_file_buffer;
-    original_file_buffer << ifs.rdbuf();
-    std::string original_file = original_file_buffer.str();
-    ifs.close();
+    try {
 
-    // 写入shebang+文件内容
-    std::ofstream ofs(exec_path, std::ios::out);
-    ofs << shebang << original_file;
-    ofs.close();
+        // 读取文件的全部内容
+        std::ifstream ifs(exec_path);
+        std::stringstream original_file_buffer;
+        original_file_buffer << ifs.rdbuf();
+        std::string original_file = original_file_buffer.str();
+        ifs.close();
+
+        // 写入shebang+文件内容
+        std::ofstream ofs(exec_path, std::ios::out);
+        ofs << shebang << original_file;
+        ofs.close();
+    } catch (std::exception& e) {
+        std::cout << "添加shebang失败。" << e.what() << std::endl;
+        return false;
+    }
 
     // 保险起见，再检查一遍shebang
     return check_shebang(exec_path);
