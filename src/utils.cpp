@@ -183,17 +183,17 @@ bool add_shebang(std::string exec_path, std::string file_type) {
     // 构造shebang
     std::string shebang;
     if (file_type == "shell") {
-        shebang == "#!/bin/bash";
+        shebang = "#!/bin/bash";
     } else if (file_type == "python") {
-        shebang == "#!/usr/bin/env python";
+        shebang = "#!/usr/bin/env python";
     } else if (file_type == "JavaScript") {
-        shebang == "#!/usr/bin/env node";
+        shebang = "#!/usr/bin/env node";
     }
-    shebang == shebang + "\n";
+    shebang = shebang + "\n";
 
     // 读取文件的全部内容
     std::ifstream ifs(exec_path);
-    std::stringstream original_fil_buffer;
+    std::stringstream original_file_buffer;
     original_file_buffer << ifs.rdbuf();
     std::string original_file = original_file_buffer.str();
     ifs.close();
@@ -204,5 +204,5 @@ bool add_shebang(std::string exec_path, std::string file_type) {
     ofs.close();
 
     // 保险起见，再检查一遍shebang
-    return check_shebang(exec_path);;
+    return check_shebang(exec_path);
 }
