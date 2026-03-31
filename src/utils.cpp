@@ -71,7 +71,11 @@ int check_exec(std::string exec_path) {
     if (file_type != "unknown") {
         bool user_choice_for_add_shebang = Inquire_add_shebang(file_type);
         if (user_choice_for_add_shebang == true) {
-            add_shebang(file_type, exec_path);
+            if (add_shebang(file_type, exec_path) == false) {
+                std::cout << "添加shebang失败。Error_105" << std::endl;
+                exit(105);
+            }
+
         } else {
             std::cout << "用户拒绝添加shebang。Error_102" << std::endl;
             exit(102);
@@ -198,5 +202,7 @@ bool add_shebang(std::string exec_path, std::string file_type) {
     std::ofstream ofs(exec_path, std::ios::out);
     ofs << shebang << original_file;
     ofs.close();
-    return true;
+
+    // 保险起见，再检查一遍shebang
+    return check_shebang(exec_path);;
 }
