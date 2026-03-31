@@ -71,7 +71,7 @@ int check_exec(std::string exec_path) {
     if (file_type != "unknown") {
         bool user_choice_for_add_shebang = Inquire_add_shebang(file_type);
         if (user_choice_for_add_shebang == true) {
-            if (add_shebang(file_type, exec_path) == false) {
+            if (add_shebang(exec_path, file_type) == false) {
                 std::cout << "添加shebang失败。Error_105" << std::endl;
                 exit(105);
             }
