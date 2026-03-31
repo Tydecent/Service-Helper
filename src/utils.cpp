@@ -60,14 +60,28 @@ int check_exec(std::string exec_path) {
         return 101;
     }
 
-    bool is_shebang = check_shebang(exec_path);
-    bool is_ELF     = check_ELF_magicnum(exec_path);
+    bool is_shebang         = check_shebang(exec_path);
+    bool is_ELF             = check_ELF_magicnum(exec_path);
+    std::string file_type   = get_file_type(exec_path);
 
-    if (is_shebang == false && is_ELF == false) {
-        std::cout << "未找到shebang和ELF头，如该文件为脚本文件，请添加shebang。文件类型为：" << get_file_type(exec_path) << "。Error_102" << std::endl;
-        return 102;
+    if (is_shebang == true || is_ELF == true) {
+        goto add_executable_to_path_part;
     }
 
+    if (file_type != "unknown") {
+        bool user_choice_for_add_shebang = Inquire_add_shebang(file_type);
+        if (user_choice_for_add_shebang == true) {
+            add_shebang(file_type, exec_path);
+        } else {
+            std::cout << "用户拒绝添加shebang。Error_102" << std::endl;
+            exit(102);
+        }
+    } else {
+        exit(104);
+    }
+
+
+add_executable_to_path_part:
     if (add_executable_to_path(exec_path) == false) {
         std::cout << "添加可执行权限失败。Error_103" << std::endl;
         return 103;
@@ -157,4 +171,18 @@ bool Inquire_add_shebang(std::string file_type) {
     } else {
         return Inquire_add_shebang(file_type);
     }
+}
+
+bool add_shebang(std::string exec_path, std::string file_type) {
+    std::ofstream ofs;
+    ofs.open(exec_path, std::ios::out);
+    if (file_type == "shell") {
+        ofs << "#!/bin/bash" << std::endl;
+    } else if (file_type == "python") {
+        ofs << "#!/usr/bin/env python3" << std::endl;
+    } else if (file_type == "JavaScript") {
+        ofs << "#!/usr/bin/env node" << std::endl;
+    }
+    ofs.close();
+    return true;
 }

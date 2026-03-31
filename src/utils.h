@@ -33,3 +33,5 @@ std::string get_file_ext(std::string exec_path);
 std::string get_file_type(std::string exec_path);
 
 bool Inquire_add_shebang(std::string file_type);
+
+bool add_shebang(std::string exec_path, std::string file_type);
