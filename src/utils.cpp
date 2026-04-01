@@ -108,22 +108,32 @@ bool check_file_exists(std::string exec_path) {
 
 bool check_shebang(std::string exec_path) {
     // 检查可执行文件的shebang，返回true表示shebang存在且正确
+    // 打开文件
     std::ifstream file(exec_path);
 
-    char buffer[2];
-
-    file.read(buffer, 2);
-
-    if (file.gcount() == 2) {
-        if (buffer[0] == '#' && buffer[1] == '!') {
-            return true;
-        } else {
-            return false;
-        }
-    } else {
+    // 读取第一行
+    std::string first_line;
+    if (std::getline(file, first_line) == false) {
         return false;
     }
 
+    // 检查前两个字符为#!
+    if ((first_line.length() >= 2 && first_line[0] == '#' && first_line[1] == '!') == false) {
+        return false;
+    }
+
+    // 读取shebang
+    std::string shebang = first_line.substr(2);
+
+    // 求第一个单词
+    std::string jieshiqi = get_string_first_word(shebang);
+
+    // 检查shebang是否存在并可执行
+    if (access(jieshiqi.c_str(), X_OK) != 0) {
+        return false;
+    }
+
+    return true;
 }
 
 bool check_ELF_magicnum(std::string exec_path) {
@@ -231,4 +241,14 @@ void effective_service(std::string service_name) {
 std::string get_absolute_path(std::string path) {
     // 获取绝对路径
     return fs::canonical(path).string();
+}
+
+std::string get_string_first_word(std::string str) {
+    int len = str.length();
+    for (int i = 0; i < len; i++) {
+        if (str[i] == ' ') {
+            return str.substr(0, i);
+        }
+    }
+    return str;
 }
