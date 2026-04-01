@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
     }
 
     // 使服务生效
-    effective_service(inquire_result[1] + ".service")
+    effective_service(inquire_result[1] + ".service");
 
     return 0;
 }
