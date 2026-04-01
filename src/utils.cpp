@@ -227,3 +227,8 @@ void effective_service(std::string service_name) {
     system_call("systemctl enable " + service_name);
     system_call("systemctl start " + service_name);
 }
+
+std::string get_absolute_path(std::string path) {
+    // 获取绝对路径
+    return fs::canonical(path).string();
+}

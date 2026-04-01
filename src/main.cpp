@@ -15,6 +15,9 @@ int main(int argc, char *argv[]) {
     // 询问信息
     std::vector<std::string> inquire_result = Inquire();
 
+    // 处理相对路径
+    inquire_result[0] = get_absolute_path(inquire_result[0]);
+
     // 检查可执行文件
     check_exec(inquire_result[0]);
 
