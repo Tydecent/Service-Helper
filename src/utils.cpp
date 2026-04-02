@@ -1,6 +1,7 @@
 #include "utils.h"
 
 bool is_root() {
+    // 判断是否为root权限
     if (getuid() == 0) {
         return true;
     } else {
@@ -9,6 +10,7 @@ bool is_root() {
 }
 
 std::string Inquire_once(std::string question) {
+    // 询问一次信息
     std::string result;
     std::cout << question;
     std::cin >> result;
@@ -16,7 +18,6 @@ std::string Inquire_once(std::string question) {
 }
 
 std::vector<std::string> Inquire() {
-
     // 询问信息
     std::string exec_path = Inquire_once("请输入可执行文件位置：");
 
@@ -234,6 +235,7 @@ bool add_shebang(std::string exec_path, std::string file_type) {
 }
 
 void effective_service(std::string service_name) {
+    // 使服务生效
     system_call("systemctl enable " + service_name);
     system_call("systemctl start " + service_name);
 }
@@ -244,6 +246,7 @@ std::string get_absolute_path(std::string path) {
 }
 
 std::string get_string_first_word(std::string str) {
+    // 获取字符串的首个单词
     int len = str.length();
     for (int i = 0; i < len; i++) {
         if (str[i] == ' ') {
