@@ -113,7 +113,7 @@ bool check_shebang(std::string exec_path) {
 
     // 读取第一行
     std::string first_line;
-    if (std::getline(file, first_line) == false) {
+    if (std::getline(file, first_line).fail()) {
         return false;
     }
 

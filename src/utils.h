@@ -39,3 +39,5 @@ bool add_shebang(std::string exec_path, std::string file_type);
 void effective_service(std::string service_name);
 
 std::string get_absolute_path(std::string path);
+
+std::string get_string_first_word(std::string str);
