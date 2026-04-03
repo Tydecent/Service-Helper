@@ -128,9 +128,7 @@ bool check_shebang(std::string exec_path) {
 
     // 求第一个单词
     std::string jieshiqi = get_string_first_word(shebang);
-
-    // 检查shebang是否存在并可执行
-    if (access(jieshiqi.c_str(), X_OK) != 0) {
+    if (check_shebang_kezhixing(jieshiqi) == false) {
         return false;
     }
 
@@ -254,4 +252,12 @@ std::string get_string_first_word(std::string str) {
         }
     }
     return str;
+}
+
+bool check_shebang_kezhixing(std::string jieishiqi) {
+    // 检查shebang的解释器是否存在并可执行
+    if (access(jieshiqi.c_str(), X_OK) != 0) {
+        return false;
+    }
+    return true;
 }
