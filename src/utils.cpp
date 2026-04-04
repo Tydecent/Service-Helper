@@ -262,7 +262,7 @@ std::string get_string_first_word(std::string str) {
     return str;
 }
 
-bool check_shebang_kezhixing(std::string jieishiqi) {
+bool check_shebang_kezhixing(std::string jieshiqi) {
     // 检查shebang的解释器是否存在并可执行
     if (access(jieshiqi.c_str(), X_OK) != 0) {
         return false;
