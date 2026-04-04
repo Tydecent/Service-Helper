@@ -169,6 +169,10 @@ std::string get_file_type(std::string exec_path) {
         return "python";
     } else if (file_ext == ".js") {
         return "JavaScript";
+    } else if (file_ext == ".php"){
+        return "php";
+    } else if (file_ext == ".pl") {
+        return "perl";
     } else {
         return "unknown";
     }
@@ -197,6 +201,10 @@ bool add_shebang(std::string exec_path, std::string file_type) {
         shebang = "#!/usr/bin/env python";
     } else if (file_type == "JavaScript") {
         shebang = "#!/usr/bin/env node";
+    } else if (file_type == "php") {
+        shebang = "#!/usr/bin/env php";
+    } else if (file_type == "perl") {
+        shebang = "#!/usr/bin/env perl";
     }
     shebang = shebang + "\n";
 
