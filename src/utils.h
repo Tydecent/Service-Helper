@@ -35,3 +35,11 @@ std::string get_file_type(std::string exec_path);
 bool Inquire_add_shebang(std::string file_type);
 
 bool add_shebang(std::string exec_path, std::string file_type);
+
+void effective_service(std::string service_name);
+
+std::string get_absolute_path(std::string path);
+
+std::string get_string_first_word(std::string str);
+
+bool check_shebang_kezhixing(std::string exec_path);

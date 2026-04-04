@@ -1,6 +1,7 @@
 #include "utils.h"
 
 bool is_root() {
+    // 判断是否为root权限
     if (getuid() == 0) {
         return true;
     } else {
@@ -9,6 +10,7 @@ bool is_root() {
 }
 
 std::string Inquire_once(std::string question) {
+    // 询问一次信息
     std::string result;
     std::cout << question;
     std::cin >> result;
@@ -16,7 +18,6 @@ std::string Inquire_once(std::string question) {
 }
 
 std::vector<std::string> Inquire() {
-
     // 询问信息
     std::string exec_path = Inquire_once("请输入可执行文件位置：");
 
@@ -108,22 +109,30 @@ bool check_file_exists(std::string exec_path) {
 
 bool check_shebang(std::string exec_path) {
     // 检查可执行文件的shebang，返回true表示shebang存在且正确
+    // 打开文件
     std::ifstream file(exec_path);
 
-    char buffer[2];
-
-    file.read(buffer, 2);
-
-    if (file.gcount() == 2) {
-        if (buffer[0] == '#' && buffer[1] == '!') {
-            return true;
-        } else {
-            return false;
-        }
-    } else {
+    // 读取第一行
+    std::string first_line;
+    if (std::getline(file, first_line).fail()) {
         return false;
     }
 
+    // 检查前两个字符为#!
+    if ((first_line.length() >= 2 && first_line[0] == '#' && first_line[1] == '!') == false) {
+        return false;
+    }
+
+    // 读取shebang
+    std::string shebang = first_line.substr(2);
+
+    // 求第一个单词
+    std::string jieshiqi = get_string_first_word(shebang);
+    if (check_shebang_kezhixing(jieshiqi) == false) {
+        return false;
+    }
+
+    return true;
 }
 
 bool check_ELF_magicnum(std::string exec_path) {
@@ -160,6 +169,10 @@ std::string get_file_type(std::string exec_path) {
         return "python";
     } else if (file_ext == ".js") {
         return "JavaScript";
+    } else if (file_ext == ".php"){
+        return "php";
+    } else if (file_ext == ".pl") {
+        return "perl";
     } else {
         return "unknown";
     }
@@ -188,6 +201,10 @@ bool add_shebang(std::string exec_path, std::string file_type) {
         shebang = "#!/usr/bin/env python";
     } else if (file_type == "JavaScript") {
         shebang = "#!/usr/bin/env node";
+    } else if (file_type == "php") {
+        shebang = "#!/usr/bin/env php";
+    } else if (file_type == "perl") {
+        shebang = "#!/usr/bin/env perl";
     }
     shebang = shebang + "\n";
 
@@ -221,4 +238,34 @@ bool add_shebang(std::string exec_path, std::string file_type) {
 
     // 保险起见，再检查一遍shebang
     return check_shebang(exec_path);
+}
+
+void effective_service(std::string service_name) {
+    // 使服务生效
+    system_call("systemctl enable " + service_name);
+    system_call("systemctl start " + service_name);
+}
+
+std::string get_absolute_path(std::string path) {
+    // 获取绝对路径
+    return fs::canonical(path).string();
+}
+
+std::string get_string_first_word(std::string str) {
+    // 获取字符串的首个单词
+    int len = str.length();
+    for (int i = 0; i < len; i++) {
+        if (str[i] == ' ') {
+            return str.substr(0, i);
+        }
+    }
+    return str;
+}
+
+bool check_shebang_kezhixing(std::string jieshiqi) {
+    // 检查shebang的解释器是否存在并可执行
+    if (access(jieshiqi.c_str(), X_OK) != 0) {
+        return false;
+    }
+    return true;
 }
