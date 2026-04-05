@@ -6,7 +6,8 @@ add_executable(service-helper
 
                src/main.cpp 
                src/utils.cpp 
-               src/service_creator.cpp)
+               src/service_creator.cpp
+               src/cli_parser.cpp)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
