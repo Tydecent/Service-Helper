@@ -6,6 +6,31 @@
 
 
 int main(int argc, char *argv[]) {
+    // 处理命令行参数
+    try {
+        cxxopts::Options options("Service Helper", "Linux服务创建应用——用于快捷创建服务");
+
+        options.add_options()
+            ("h,help", "帮助信息")
+            ("v,version", "版本信息")
+
+    } catch (const cxxopts::exceptions::exception& e) {
+        std::cout << "命令行参数错误：" << e.what() << std::endl;
+        return -1;
+    }
+
+    auto result = options.parse(argc, argv);
+
+    if (result.count("help")) {
+        std::cout << options.help() << std::endl;
+        return 0;
+    }
+
+    if (result.count("version")) {
+        std::cout << "版本信息" << std::endl;
+        return 0;
+    }
+
     // 检查root权限
     if (is_root() == false) {
         std::cout << "添加服务需要root权限，请以root或sudo权限运行本程序。" << std::endl;
