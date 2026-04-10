@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cxxopts.hpp>
 
 #include "utils.h"
 #include "service_creator.h"
