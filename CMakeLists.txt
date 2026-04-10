@@ -20,3 +20,19 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(cxxopts)
 target_link_libraries(service-helper PRIVATE cxxopts)
+
+# 获取构建时间（配置阶段执行一次）
+string(TIMESTAMP BUILD_TIMESTAMP "%Y-%m-%d %H:%M:%S")
+
+# 获取 Git 哈希（配置阶段执行一次）
+execute_process(
+    COMMAND git rev-parse --short HEAD
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    OUTPUT_VARIABLE GIT_HASH
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    ERROR_QUIET
+)
+
+# 传递给所有目标
+add_definitions(-DBUILD_TIMESTAMP="${BUILD_TIMESTAMP}")
+add_definitions(-DGIT_HASH="${GIT_HASH}")
