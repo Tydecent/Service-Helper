@@ -43,3 +43,5 @@ std::string get_absolute_path(std::string path);
 std::string get_string_first_word(std::string str);
 
 bool check_shebang_kezhixing(std::string exec_path);
+
+void print_version_info();

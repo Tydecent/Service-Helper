@@ -269,3 +269,10 @@ bool check_shebang_kezhixing(std::string jieshiqi) {
     }
     return true;
 }
+
+void print_version_info() {
+    // 打印版本信息
+    std::cout << "Service Helper\n"
+              << GIT_HASH << "\n"
+              << "Build Time: " << BUILD_TIMESTAMP << std::endl;
+}
