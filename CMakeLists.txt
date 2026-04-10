@@ -12,14 +12,8 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # 使用cxxopts处理命令行。
-include(FetchContent)
-FetchContent_Declare(
-  cxxopts
-  GIT_REPOSITORY https://github.com/jarro2783/cxxopts
-  GIT_TAG        v3.3.1
-)
-FetchContent_MakeAvailable(cxxopts)
-target_link_libraries(service-helper PRIVATE cxxopts)
+find_package(cxxopts CONFIG REQUIRED)
+target_link_libraries(service-helper PRIVATE cxxopts::cxxopts)
 
 # 获取构建时间（配置阶段执行一次）
 string(TIMESTAMP BUILD_TIMESTAMP "%Y-%m-%d %H:%M:%S")
