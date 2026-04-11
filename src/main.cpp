@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
 
         options.add_options()
             ("h,help", "帮助信息")
-            ("v,version", "版本信息")
+            ("v,version", "版本信息");
 
     } catch (const cxxopts::exceptions::exception& e) {
         std::cout << "命令行参数错误：" << e.what() << std::endl;
