@@ -8,17 +8,13 @@
 
 int main(int argc, char *argv[]) {
     // 处理命令行参数
-    try {
-        cxxopts::Options options("Service Helper", "Linux服务创建应用——用于快捷创建服务");
 
-        options.add_options()
-            ("h,help", "帮助信息")
-            ("v,version", "版本信息");
+    cxxopts::Options options("Service Helper", "Linux服务创建应用——用于快捷创建服务");
 
-    } catch (const cxxopts::exceptions::exception& e) {
-        std::cout << "命令行参数错误：" << e.what() << std::endl;
-        return -1;
-    }
+    options.add_options()
+        ("h,help", "帮助信息")
+        ("v,version", "版本信息");
+   
 
     auto result = options.parse(argc, argv);
 
