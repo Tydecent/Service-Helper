@@ -43,3 +43,4 @@ endif()
 # 传递给所有目标
 add_definitions(-DBUILD_TIMESTAMP="${BUILD_TIMESTAMP}")
 add_definitions(-DGIT_HASH="${GIT_HASH}")
+add_definitions(-DGIT_TAG="${GIT_TAG}")
