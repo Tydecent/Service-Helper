@@ -275,6 +275,7 @@ void print_version_info() {
     std::cout << "Service Helper\n"
               << "Version Info\n"
               << "--------------\n"
+              << "Git Tag: " << GIT_TAG << "\n"
               << "Git Hash: " << GIT_HASH << "\n"
               << "Build Time: " << BUILD_TIMESTAMP << std::endl;
 }
