@@ -27,6 +27,19 @@ execute_process(
     ERROR_QUIET
 )
 
+# 获取 Git Tag（当前提交的）
+execute_process(
+    COMMAND git tag --points-at HEAD
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    OUTPUT_VARIABLE GIT_TAG
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    ERROR_QUIET
+)
+
+if(NOT GIT_TAG)
+    set(GIT_TAG "unknown")
+endif()
+
 # 传递给所有目标
 add_definitions(-DBUILD_TIMESTAMP="${BUILD_TIMESTAMP}")
 add_definitions(-DGIT_HASH="${GIT_HASH}")
