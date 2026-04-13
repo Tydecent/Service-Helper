@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
     }
 
     if (result.count("version")) {
-        print_version_info()
+        print_version_info();
         return 0;
     }
 
