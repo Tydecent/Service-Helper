@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
     }
 
     if (result.count("version")) {
-        std::cout << "版本信息" << std::endl;
+        print_version_info()
         return 0;
     }
 
