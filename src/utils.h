@@ -7,6 +7,8 @@
 #include <cstdlib>
 #include <filesystem>
 
+#include "service_creator.h"
+
 namespace fs = std::filesystem;
 
 bool is_root();

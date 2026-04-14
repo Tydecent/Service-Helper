@@ -2,8 +2,8 @@
 #include <string>
 #include <cxxopts.hpp>
 
-#include "utils.h"
 #include "service_creator.h"
+#include "utils.h"
 
 
 int main(int argc, char *argv[]) {
