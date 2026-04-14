@@ -33,6 +33,6 @@ int main(int argc, char *argv[]) {
         return add_service();
     }
 
-    options.help();
+    std::cout << options.help();
     return 0;
 }
