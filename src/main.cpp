@@ -13,7 +13,8 @@ int main(int argc, char *argv[]) {
 
     options.add_options()
         ("h,help", "帮助信息")
-        ("v,version", "版本信息");
+        ("v,version", "版本信息")
+        ("a,add", "创建服务");
    
 
     auto result = options.parse(argc, argv);
@@ -28,5 +29,10 @@ int main(int argc, char *argv[]) {
         return 0;
     }
 
-    return add_service();
+    if (result.count("add")) {
+        return add_service();
+    }
+
+    options.help();
+    return 0;
 }
