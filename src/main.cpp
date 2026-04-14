@@ -27,6 +27,12 @@ int main(int argc, char *argv[]) {
         print_version_info();
         return 0;
     }
+    
+    // 检查root权限
+    if (is_root() == false) {
+        std::cout << "执行此操作需要root权限，请以root或sudo权限运行本程序。" << std::endl;
+        return -1;
+    }
 
     if (result.count("add")) {
         return add_service();

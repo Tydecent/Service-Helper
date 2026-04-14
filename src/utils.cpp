@@ -281,12 +281,6 @@ void print_version_info() {
 }
 
 int add_service() {
-        // 检查root权限
-    if (is_root() == false) {
-        std::cout << "添加服务需要root权限，请以root或sudo权限运行本程序。" << std::endl;
-        return -1;
-    }
-
     // 询问信息
     std::vector<std::string> inquire_result = Inquire();
 
