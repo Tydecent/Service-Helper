@@ -42,4 +42,16 @@ namespace ServiceHelper_command {
         
         return 0;
     }
+
+    int list() {
+        // 列出所有自定义服务
+        fs::path service_path("/etc/systemd/system/");
+        for (const auto& entry : fs::directory_iterator(service_path)) {
+            if (entry.path().extension() == ".service") {
+                std::cout << entry.path().filename().string() << std::endl;
+            }
+        }
+
+        return 0;
+    }
 }

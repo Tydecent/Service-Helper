@@ -9,4 +9,5 @@
 namespace ServiceHelper_command {
     int     add();
     int     version();
+    int     list();
 }
