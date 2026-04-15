@@ -3,6 +3,7 @@
 #include <cxxopts.hpp>
 
 #include "utils.h"
+#include "command.h"
 
 
 int main(int argc, char *argv[]) {
@@ -24,8 +25,7 @@ int main(int argc, char *argv[]) {
     }
 
     if (result.count("version")) {
-        print_version_info();
-        return 0;
+        return ServiceHelper_command::version();
     }
     
     // 检查root权限
@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
     }
 
     if (result.count("add")) {
-        return add_service();
+        return ServiceHelper_command::add();
     }
 
     std::cout << options.help();
