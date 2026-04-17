@@ -10,7 +10,7 @@
 
 namespace fs = std::filesystem;
 
-bool is_root();
+void check_root();
 
 std::string Inquire_once(std::string question);
 std::vector<std::string> Inquire();
