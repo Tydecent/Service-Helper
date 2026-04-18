@@ -1,13 +1,11 @@
 # Service Helper
 
-版本：v0.4.0
-
 ## 概述
-Service Helper是一个帮助开发者~~管理~~添加Linux系统服务的工具。
+Service Helper是一个帮助开发者管理Linux系统服务的工具。
 
 相信大家在写Linux程序的时候，经常需要将你自己编写的程序作为服务安装，以便于后台运行。但是，安装服务的过程并不简单，尤其是在复杂的系统环境下。Service Helper就是为了解决这个问题而生的。
 
-Service Helper可以帮助你快速安装服务。它还可以帮助你自动生成服务配置文件、自动添加shebang，并将服务添加到系统服务管理器中。
+Service Helper可以帮助你快速安装/卸载自定义服务。它还可以帮助你自动生成服务配置文件、自动添加shebang，并将服务添加到系统服务管理器中。
 
 ## 功能
 - 傻瓜式添加：只需按照引导操作，即可快速添加服务。
@@ -21,7 +19,10 @@ Service-Helper
 │   ├── service_creator.cpp # 服务配置文件生成器
 │   ├── service_creator.h   
 │   ├── utils.cpp           # 工具模块
-│   └── utils.h             
+│   ├── utils.h          
+│   ├── command.cpp         # 命令行处理模块
+│   └── command.h          
+├── build.sh                # 构建脚本
 ├── .gitignore
 ├── CMakeLists.txt
 ├── LICENSE
