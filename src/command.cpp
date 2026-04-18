@@ -25,9 +25,6 @@ namespace ServiceHelper_command {
             return -2;
         }
 
-        // 使服务生效
-        effective_service(inquire_result[1] + ".service");
-
         return 0;
     }
 
@@ -53,5 +50,23 @@ namespace ServiceHelper_command {
         }
 
         return 0;
+    }
+
+    int remove() {
+        // 询问服务名称
+        std::string service_name = Inquire_once("请输入要删除的服务名称：");
+
+        // 构造服务文件路径
+        std::string service_file_path = "/etc/systemd/system/" + service_name + ".service";
+
+        // 删除服务文件
+        int remove_return_code = system_call("rm " + service_file_path); 
+        
+        if (remove_return_code != 0) {
+            std::cout << "删除失败，system_call_return_code：" << remove_return_code << std::endl;
+            return remove_return_code;
+        }
+
+        // 使服务生效
     }
 }
