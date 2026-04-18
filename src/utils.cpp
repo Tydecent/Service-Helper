@@ -1,11 +1,10 @@
 #include "utils.h"
 
-bool is_root() {
+void check_root() {
     // 判断是否为root权限
-    if (getuid() == 0) {
-        return true;
-    } else {
-        return false;
+    if (getuid() != 0) {
+        std::cout << "执行此操作需要root权限，请以root或sudo权限运行本程序。" << std::endl;
+        exit(-1);
     }
 }
 
