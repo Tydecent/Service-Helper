@@ -25,7 +25,7 @@ namespace ServiceHelper_command {
             return -2;
         }
 
-        effective_service(std::string service_name);
+        effective_service(inquire_result[1] + ".service")
 
         return 0;
     }
