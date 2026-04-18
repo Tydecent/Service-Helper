@@ -67,6 +67,6 @@ namespace ServiceHelper_command {
             return remove_return_code;
         }
 
-        // 使服务生效
+        return 0;
     }
 }
